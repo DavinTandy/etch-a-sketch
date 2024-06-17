@@ -1,0 +1,14 @@
+body {
+    display: flex;
+    justify-content: center;
+    background-color: #EBE9E1;
+    color: #2C3531;
+}
+
+.container {
+    width: 800px;
+    height: 800px;
+    border: 5px solid #2C3531;
+    display: flex;
+    flex-wrap: wrap;
+}
