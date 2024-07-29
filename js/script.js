@@ -2,18 +2,40 @@ const slider = document.getElementById("slider");
 const sliderValue = document.getElementById("slider-value");
 const container = document.getElementById("container");
 
-slider.addEventListener("input", function(){sliderValue.innerHTML = "Grid size: " + slider.value + "x" + slider.value});
+slider.addEventListener("input", resizeGrid);
+window.addEventListener("load", resizeGrid);
 
-for (let i = 0; i < 256; i++) {
-    const div = document.createElement("div");
-    div.classList.add("grids")
-    div.style.height = "50px";
-    div.style.width = "50px";
-    container.appendChild(div);
+function deleteElement() {
+    const grid = document.getElementsByClassName("grid");
+    while (grid.length > 0) {
+        grid[0].parentNode.removeChild(grid[0]);
+    }
 }
 
-const grids = document.getElementsByClassName("grids");
+function updateSliderText() {
+    sliderValue.innerHTML = "Grid size: " + slider.value + "x" + slider.value;
+}
 
-for (let i = 0; i < grids.length; i++) {
-    grids[i].addEventListener("mouseover", function(){grids[i].style.backgroundColor = "#2C3531"});
+function createGrid() {
+    for (let i = 0; i < slider.value*slider.value; i++) {
+        const div = document.createElement("div");
+        div.classList.add("grid");
+        div.style.height = 800/slider.value + "px";
+        div.style.width = 800/slider.value + "px";
+        container.appendChild(div);
+    }
+}
+
+function hoverEffect() {
+    const grid = document.getElementsByClassName("grid");
+    for (let i = 0; i < grid.length; i++) {
+        grid[i].addEventListener("mouseover", function(){grid[i].style.backgroundColor = "#2C3531"});
+    }
+}
+
+function resizeGrid() {
+    deleteElement();
+    updateSliderText();
+    createGrid();
+    hoverEffect();
 }
