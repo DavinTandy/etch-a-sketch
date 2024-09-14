@@ -4,6 +4,7 @@ const container = document.getElementById("container");
 const colorButton = document.getElementById("color-picker");
 const buttons = document.getElementsByClassName("button");
 const rainbowColor = document.getElementById("rainbow-button");
+const eraser = document.getElementById("eraser-button");
 
 slider.addEventListener("input", resizeGrid);
 window.addEventListener("load", resizeGrid);
@@ -18,6 +19,7 @@ for (let i = 0; i < buttons.length - 1; i++) {
 }
 
 rainbowColor.addEventListener("click", hoverEffect);
+eraser.addEventListener("click", hoverEffect);
 colorButton.addEventListener("click", hoverEffect);
 
 function deleteElement() {
@@ -44,14 +46,14 @@ function createGrid() {
     }
 }
 
+function random(min, max) {
+    return Math.random() * (max - min) + min;
+}
+
 function hoverEffect() {
     const grid = document.getElementsByClassName("grid");
     const color = document.getElementById("color-picker");
     const colorList = ["#33A8C7", "#52E3E1", "#A0E426", "#FDF148", "#FFAB00", "#F77976", "#F050AE", "#D883FF", "#9336FD"];
-
-    function random(min, max) {
-        return Math.random() * (max - min) + min;
-    }
 
     if (rainbowColor.classList.contains("button-active")) {
         for (let i = 0; i < grid.length; i++) {
@@ -60,6 +62,10 @@ function hoverEffect() {
             }
 
             grid[i].addEventListener("mouseover", function(){grid[i].style.backgroundColor = randomColor()});
+        }
+    } else if (eraser.classList.contains("button-active")) {
+        for (let i = 0; i < grid.length; i++) {
+            grid[i].addEventListener("mouseover", function(){grid[i].style.backgroundColor = "#F5F7F8"})
         }
     } else {
         for (let i = 0; i < grid.length; i++) {
