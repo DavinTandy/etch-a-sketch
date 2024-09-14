@@ -43,7 +43,7 @@ body {
     cursor: pointer;
 }
 
-.button:hover {
+.button:hover, .button-active {
     background-color: #EDEDED;
     color: #2C3531;
 }

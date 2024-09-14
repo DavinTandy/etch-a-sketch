@@ -1,9 +1,20 @@
 const slider = document.getElementById("slider");
 const sliderValue = document.getElementById("slider-value");
 const container = document.getElementById("container");
+const colorButton = document.getElementById("color-picker");
+const buttons = document.getElementsByClassName("button");
 
 slider.addEventListener("input", resizeGrid);
 window.addEventListener("load", resizeGrid);
+
+colorButton.addEventListener("click", removeButtonActive)
+
+for (let i = 0; i < buttons.length - 1; i++) {
+    buttons[i].addEventListener("click", function() {
+        removeButtonActive();
+        this.className += " button-active";
+    })
+}
 
 function deleteElement() {
     const grid = document.getElementsByClassName("grid");
@@ -24,7 +35,7 @@ function createGrid() {
         div.classList.add("grid");
         div.style.height = 800/slider.value + "px";
         div.style.width = 800/slider.value + "px";
-        
+
         container.appendChild(div);
     }
 }
@@ -43,4 +54,11 @@ function resizeGrid() {
     updateSliderText();
     createGrid();
     hoverEffect();
+}
+
+function removeButtonActive() {
+    const currentActive = document.getElementsByClassName("button-active");
+    if (currentActive.length > 0) {
+        currentActive[0].className = currentActive[0].className.replace(" button-active", "");
+    }
 }
